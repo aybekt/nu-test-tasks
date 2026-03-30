@@ -1,0 +1,14 @@
+.DS_Store
+
+# Laravel
+/laravel/vendor/
+/laravel/storage/logs/
+/laravel/bootstrap/cache/
+/laravel/.env
+
+# WordPress
+/wordpress/.DS_Store
+
+# Node
+**/node_modules/
+

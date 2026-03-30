@@ -1,0 +1,48 @@
+services:
+  db:
+    image: mariadb:11.4
+    container_name: nu_wp_db
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+      MARIADB_ROOT_PASSWORD: root
+    volumes:
+      - wp_db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:6.7-php8.3-apache
+    container_name: nu_wordpress
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      # Чтобы редиректы WordPress не уводили на неверный порт при заходе через nginx
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_HOME', 'http://localhost:8080');
+        define('WP_SITEURL', 'http://localhost:8080');
+    volumes:
+      - wp_html:/var/www/html
+      - ./wp-content/plugins/nu-custom-admin:/var/www/html/wp-content/plugins/nu-custom-admin
+
+  proxy:
+    image: nginx:1.27-alpine
+    container_name: nu_wp_proxy
+    restart: unless-stopped
+    depends_on:
+      - wordpress
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/proxy-wp.conf:/etc/nginx/proxy-wp.conf:ro
+      - ./static:/var/www/static:ro
+
+volumes:
+  wp_db_data:
+  wp_html:

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статическая версия (fallback)</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 640px; margin: 48px auto; padding: 0 16px; line-height: 1.5; }
+        h1 { color: #1e3a8a; }
+        .note { background: #eff6ff; border: 1px solid #bfdbfe; padding: 12px 16px; border-radius: 8px; margin-top: 24px; }
+        code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Статическая HTML-страница (fallback)</h1>
+    <p>Эта страница отдаётся напрямую из каталога <code>wordpress/static/</code> через nginx до обращения к WordPress.</p>
+    <p>Если удалить этот файл или запросить URL, для которого нет статики (например, после установки WP — любая страница кроме <code>/</code>), запрос уйдёт на WordPress.</p>
+    <div class="note">
+        <strong>Демонстрация:</strong> откройте <code>http://localhost:8080/</code> — при наличии этого файла вы видите статику.
+        Админка доступна по <code>/wp-admin/</code> и всегда идёт в WordPress.
+    </div>
+</body>
+</html>
