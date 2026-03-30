@@ -1,6 +1,6 @@
 # Тестовые задания NU
 
-Две части с **отдельным Docker Compose** каждая: достаточно установленного **Docker** (и Compose)
+Две части с **отдельным Docker Compose** каждая (нужден установленный **Docker**)
 
 | Часть | Каталог | URL после запуска |
 |-------|---------|-------------------|
@@ -19,7 +19,7 @@ docker compose up -d --build
 ```
 
 - Главная `http://localhost:8080/` отдаёт **статический** `static/index.html` (fallback).
-- Админка: `http://localhost:8080/wp-admin/` — при первом запуске нужно установить WordPress, а затем активировать плагин **NU Custom Admin**.
+- Админка: `http://localhost:8080/wp-admin/` - при первом запуске нужно установить WordPress, а затем активировать плагин **NU Custom Admin**.
 - Архитектура fallback: `wordpress/ARCHITECTURE.md`.
 
 Остановка: `docker compose down`.
@@ -33,7 +33,7 @@ cd laravel
 docker compose up -d --build
 ```
 
-Откройте http://localhost:8081 — форма **ФИО, ИИН, дата, текст**.
+Открываем в браузере http://localhost:8081 — форма **ФИО, ИИН, дата, текст**.
 
 - **Скачать PDF** — скачивается файл `zayavka.pdf`.
 
